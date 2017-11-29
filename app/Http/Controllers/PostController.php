@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Post;
+use Session;
 
 class PostController extends Controller
 {
@@ -16,7 +17,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //Create variable and store all blog posts in it from db.
+        $posts = Post::all();
+
+        //Return a view and pass in the variable above.
+        return view('posts.index')->withPosts($posts);
     }
 
     /**
@@ -54,6 +59,8 @@ class PostController extends Controller
 
         $post->save();
 
+        Session::flash('success', 'New post created!');
+
         //Redirect to another page (eg. posts.show)
         return redirect()->route('posts.show', $post->id);
     }
@@ -66,7 +73,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $post = Post::find($id);
+
+        return view('posts.show')->withPost($post);
     }
 
     /**
@@ -77,7 +87,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Find the post in the db
+        $post = Post::find($id);
+
+        //return the view and pass in the variable we previously created.
+        return view('posts.edit')->withPost($post);
+
     }
 
     /**
@@ -89,7 +104,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validate the data
+        $this->validate($request, array(
+
+            'title' => 'required|max:255',
+            'body' => 'required'
+
+            ));
+
+        //Save the data to the db
+        $post = Post::find($id);
+
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+
+        $post->save();
+
+        //Set flash data with success message
+        Session::flash('success', 'Post successfully updated.');
+
+        //Redirect with flash data to posts.show
+        return redirect()->route('posts.show', $post->id);
+
     }
 
     /**

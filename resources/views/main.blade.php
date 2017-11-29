@@ -11,11 +11,13 @@
     <!-- Start of container -->
     <div class="container">
 
-        @yield('content')
+      @include('partials._messages')
 
-        <hr>
+      @yield('content')
 
-        @include('partials._footer')
+      <hr>
+
+      @include('partials._footer')
 
     </div> <!-- End of container -->
 
