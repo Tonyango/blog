@@ -9,6 +9,9 @@
       <li class="nav-item {{ Request::is('/') ? "active" : "" }}">
         <a class="nav-link" href="/">Home</a>
       </li>
+      <li class="nav-item {{ Request::is('blog') ? "active" : "" }}">
+        <a class="nav-link" href="/blog">Blog</a>
+      </li>
       <li class="nav-item {{ Request::is('about') ? "active" : "" }}">
         <a class="nav-link" href="about">About</a>
       </li>
@@ -16,5 +19,23 @@
         <a class="nav-link" href="contact">Contact</a>
       </li>
     </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        
+        <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+
+        <ul class="dropdown-menu">
+          
+          <li><a href="{{ route('posts.index') }}">Posts</a></li>
+          <li><a href="">Another action</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="">Logout</a></li>
+
+        </ul>
+
+      </li>
+    </ul>
+
   </div>
 </nav>

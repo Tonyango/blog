@@ -17,6 +17,13 @@
 		<div class="col-md-5">
 			
 			<div class="card" style="background: #d7d9db; padding: 10px;">
+
+				<dl class="row">
+					
+					<dt class="col-sm-4">Url:</dt>
+					<dd class="col-sm-8"> <a href="{{ route('blog.single', $post->slug) }}">{{ url('blog/'.$post->slug) }}</a> </dd>
+
+				</dl>
 				
 				<dl class="row">
 					
@@ -47,6 +54,14 @@
 						{!! Form::submit('Delete', ['class'=> 'btn btn-danger btn-block']) !!}
 
 						{!! Form::close() !!}
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						
+						{{ Html::linkRoute('posts.index', 'View all posts', [], ['class' => 'btn btn-success btn-block btn-h1-spacing']) }}
 
 					</div>
 				</div>
