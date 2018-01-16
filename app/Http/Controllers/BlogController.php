@@ -9,11 +9,11 @@ use App\Post;
 
 class BlogController extends Controller
 {
-	public function getArchive() {
+	public function getIndex() {
 
 		$posts = Post::paginate(10);
 
-		return view('blog.archive')->withPosts($posts);
+		return view('blog.index')->withPosts($posts);
 
 	}
 
